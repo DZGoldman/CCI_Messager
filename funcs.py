@@ -1,12 +1,13 @@
-import requests, re, base64
+import requests, re, base64, csv
 import pandas as pd
+from IPython import embed
 
 # TODO fix this - .apply?
 
-def transform_columns (data, fn, columns ):
+def transform_columns (i_data, new_data, fn, columns ):
     if isinstance(columns, str):
         columns = [columns]
-        
+
     for column in columns:
         data[column] = data[column].map(fn)
     return data
@@ -42,7 +43,15 @@ def send_to_api(encoded_csv):
     pass
 
 def import_csv():
-    return pd.read_excel('test_file.xlsx')
+    with open('mock.csv', 'rt') as r:
+
+
+        i_data = csv.DictReader(r)
+
+        fieldnames = i_data.fieldnames
+        with open('new.csv', 'w') as w:
+            new_csv = csv.DictWriter(w, fieldnames = fieldnames)
+            return (i_data, new_csv)
 
 def finished_message(success_csv, fail_csv, contats):
     pass
