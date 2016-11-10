@@ -1,20 +1,20 @@
 
-import requests,   secrets
+import requests, secrets
 
 
-def send_to_api(encoded_csv):
+def send_to_api(filename, encoded_csv):
     url = "https://api.whispir.com/resource"
 
-    querystring = {"apikey":"yzxwb8pukthnsjyjfnqw9hew"}
+    querystring = {"apikey": secrets.key}
 
     payload ={
-        'name': '<filename>',
+        'name': filename,
          "scope" : "private",
          "mimeType" : "text/csv",
-         "derefUri" : '<base64>'
+         "derefUri" : encoded_csv
     }
     headers = {
-        'authorization': "ZGFuaWVsZ29sZG1hbjpTdGFybGlnaHQ0Ng== ",
+        'authorization': secrets.auth,
         'accept': "application/vnd.whispir.message-v1+json",
         'content-type': "application/vnd.whispir.message-v1+json"
         }
@@ -22,13 +22,6 @@ def send_to_api(encoded_csv):
     response = requests.post( url, data=payload, headers=headers, params=querystring)
 
     print(response.text)
-
-
-def import_csv():
-    i_file =  open('mock.csv', 'rt')
-    d_file = csv.DictReader(i_file)
-    fieldnames = d_file.fieldnames
-    return [row for  row in d_file], fieldnames
 
 
 # ['dzgoldman@wesleyan.edu', 'dannyg9917@gmail.com']

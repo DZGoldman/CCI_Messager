@@ -1,4 +1,12 @@
-import csv, base64,
+import csv, base64
+
+def import_csv():
+    i_file =  open('mock.csv', 'rt')
+    d_file = csv.DictReader(i_file)
+    fieldnames = d_file.fieldnames
+    return [row for  row in d_file], fieldnames
+
+
 
 def generate_csv(file_name, d_list, fieldnames):
     with open(file_name, 'w') as output_file:

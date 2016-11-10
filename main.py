@@ -1,5 +1,6 @@
-from funcs import *
-import pandas as pd
+from Functions.csv_funcs import *
+from Functions.app_funcs import *
+from Functions.data_funcs import *
 
 i_data, columns =  import_csv()
 
