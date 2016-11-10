@@ -1,16 +1,22 @@
 from funcs import *
 import pandas as pd
 
-i_data, clean_data = import_csv()
+i_data, columns =  import_csv()
 
+transform_columns (i_data, validate_phone_number, target_columns = 'Cell number')
+transform_columns (i_data, set_language, target_columns= '@@cci_language@@')
 
-clean_data = transform_columns (i_data, clean_data, validate_phone_number, columns = 'Cell number')
-#
-# clean_data = transform_columns (clean_data, set_language, columns= '@@cci_language@@')
-#
-# clean_data = transform_columns (clean_data, extract_alpha_num_digits, columns= ['@@cci_location@@', '@@cci_start_time@@', '@@cci_end_time@@'])
-#
-# clean_data = filter_empty_rows(clean_data, ['@@cci_location@@','@@cci_start_time@@', '@@cci_end_time@@', 'Cell number'])
+transform_columns (i_data, extract_alpha_num_digits,
+                    target_columns= ['@@cci_location@@', '@@cci_start_time@@', '@@cci_end_time@@'])
 
-print(i_data)
+removed_rows = filter_out_rows(i_data, is_null, ['@@cci_location@@','@@cci_start_time@@', '@@cci_end_time@@', 'Cell number'] )
+
+# make conditional
+generate_csv('successes.csv', i_data, columns)
+generate_csv('failures.csv', removed_rows, columns)
+
+b64_encoded_csv = encode_csv('successes.csv')
+
+# send to api
+# send emails
 # print(type(i_data) == pd.DataFrame)
