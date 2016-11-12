@@ -2,6 +2,8 @@ from Functions.csv_funcs import *
 from Functions.app_funcs import *
 from Functions.data_funcs import *
 
+new_file = 'sucesses.csv'
+
 i_data, columns =  import_csv()
 
 transform_columns (i_data, validate_phone_number, target_columns = 'Cell number')
@@ -13,10 +15,21 @@ transform_columns (i_data, extract_alpha_num_digits,
 removed_rows = filter_out_rows(i_data, is_null, ['@@cci_location@@','@@cci_start_time@@', '@@cci_end_time@@', 'Cell number'] )
 
 # make conditional
-generate_csv('successes.csv', i_data, columns)
+
+generate_csv(new_file, i_data, columns)
 generate_csv('failures.csv', removed_rows, columns)
 
-b64_encoded_csv = encode_csv('successes.csv')
+
+print(send_to_api.__doc__)
+
+# send_to_api(new_file,
+#     # encode_csv(new_file)
+#     encode_json(i_data)
+# )
+
+
+# send_with_attachments(['dzgoldman@wesleyan.edu', 'dannyg9917@gmail.com'],new_file,len(i_data), len(removed_rows))
+
 
 # send to api
 # send emails

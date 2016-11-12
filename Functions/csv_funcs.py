@@ -1,4 +1,4 @@
-import csv, base64
+import csv, base64, json
 
 def import_csv():
     i_file =  open('mock.csv', 'rt')
@@ -19,7 +19,12 @@ def encode_csv (path):
         s = f.read().encode('utf-8')
         b = base64.b64encode(s)
     return b
+def encode_json(j):
+    print(j)
+    s = json.dumps(j)
 
+    b = s.encode('utf-8')
+    return base64.b64encode(b)
 
 def transform_columns (data, fn, target_columns ):
     if isinstance(target_columns, str):

@@ -1,43 +1,64 @@
+''' Miscelaneous, application functions, that deal with higher level functionality (sending email, making API requests, etc)
+'''
 
-import requests, secrets
-
+import requests, secrets, smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
 def send_to_api(filename, encoded_csv):
+    '''
+    Args:
+        filename (string): string of csv file oath
+        encoded_csv (bytes): csv file B64 encoded
+    Behavior:
+        Sends data to Whispir API
+    Returns:
+        Response Object
+    '''
     url = "https://api.whispir.com/resource"
-
     querystring = {"apikey": secrets.key}
 
     payload ={
         'name': filename,
          "scope" : "private",
-         "mimeType" : "text/csv",
+         "mimeType" : "application/json",
          "derefUri" : encoded_csv
     }
     headers = {
+
         'authorization': secrets.auth,
-        'accept': "application/vnd.whispir.message-v1+json",
-        'content-type': "application/vnd.whispir.message-v1+json"
+        # 'accept': "application/vnd.whispir.resource-v1+json",
+        'content-type': "application/vnd.whispir.resource-v1+json"
         }
 
-    response = requests.post( url, data=payload, headers=headers, params=querystring)
+    response = requests.post( url, auth = (secrets.user, secrets.whispir_password), data=payload,
+    # headers=headers,
+     params=querystring)
 
     print(response.text)
 
 
 # ['dzgoldman@wesleyan.edu', 'dannyg9917@gmail.com']
-def send_with_attachments(recipients, message):
-    fromaddr = info.gmail
+def send_with_attachments(recipients, path, success_count, fail_count):
+    '''
+    Args:
+        recipients: 
+    '''
+
+    fromaddr = secrets.email
     msg = MIMEMultipart()
 
     msg['From'] = fromaddr
     msg['To'] = ", ".join(recipients)
     msg['Subject'] = "SUBJECT OF THE EMAIL"
 
-    body = "TEXT YOU WANT TO SEND"
+    body = "Blah blah"
 
     msg.attach(MIMEText(body, 'plain'))
 
-    filename = "weather_year.csv"
+    filename = "successes.csv"
     attachment = open(filename, "rb")
 
     part = MIMEBase('application', 'octet-stream')
@@ -49,7 +70,7 @@ def send_with_attachments(recipients, message):
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(fromaddr, info.gpassword)
+    server.login(fromaddr, secrets.password)
     text = msg.as_string()
     server.sendmail(fromaddr, recipients, text)
     server.quit()
