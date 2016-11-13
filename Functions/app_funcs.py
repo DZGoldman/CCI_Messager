@@ -1,5 +1,4 @@
-''' Miscelaneous, application functions, that deal with higher level functionality (sending email, making API requests, etc)
-'''
+''' Miscelaneous application functions, that deal with higher level functionality (sending email, making API requests, etc)'''
 
 import requests, secrets, smtplib
 from email.mime.multipart import MIMEMultipart
@@ -9,14 +8,13 @@ from email import encoders
 
 def send_to_api(filename, encoded_csv):
     '''
-    Args:
-        filename (string): string of csv file oath
-        encoded_csv (bytes): csv file B64 encoded
-    Behavior:
-        Sends data to Whispir API
-    Returns:
-        Response Object
+    Sends data to Whispir API. Uses requests module
+
+    param filename (string): string of csv file oath
+    param encoded_csv (bytes): csv file B64 encoded
+    returns: HTTP response object
     '''
+
     url = "https://api.whispir.com/resource"
     querystring = {"apikey": secrets.key}
 
@@ -43,8 +41,13 @@ def send_to_api(filename, encoded_csv):
 # ['dzgoldman@wesleyan.edu', 'dannyg9917@gmail.com']
 def send_with_attachments(recipients, path, success_count, fail_count):
     '''
-    Args:
-        recipients: 
+    Sends mass email notification with csv of succesfully contacted records as attachment. Users smtplib and email modules
+
+    param recipients(list): strings of email addresses
+    param path (str): path of csv file to be attached
+    param success_count (int): number of messages successfully sent out
+    param fail_count (int): number of messages that failed to send
+    returns: None
     '''
 
     fromaddr = secrets.email
