@@ -1,10 +1,12 @@
 ''' Miscelaneous application functions, that deal with higher level functionality (sending email, making API requests, etc)'''
 
-import requests, secrets, smtplib
+import requests, secrets, smtplib, json
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+from IPython import embed
+
 
 def send_to_api(filename, encoded_csv):
     '''
@@ -15,26 +17,30 @@ def send_to_api(filename, encoded_csv):
     returns: HTTP response object
     '''
 
-    url = "https://api.whispir.com/resource"
+    url = "https://api.whispir.com/resources"
     querystring = {"apikey": secrets.key}
 
-    payload ={
-        'name': filename,
-         "scope" : "private",
-         "mimeType" : "application/json",
-         "derefUri" : encoded_csv
-    }
+    # payload ={
+    #     'name': filename,
+    #      "scope" : "private",
+    #      "mimeType" : "application/json",
+    #      "derefUri" : encoded_csv
+    # }
+    # print(encoded_csv)
+    payload = "{\"name\":\"%s\",\"scope\":\"private\",\"mimeType\":\"application/json\", \"derefUri\":\"%s\" }" %(filename, encoded_csv)
+
+    # print(encoded_csv)
     headers = {
 
-        'authorization': secrets.auth,
-        # 'accept': "application/vnd.whispir.resource-v1+json",
+        'accept': "application/vnd.whispir.resource-v1+json",
         'content-type': "application/vnd.whispir.resource-v1+json"
         }
 
     response = requests.post( url, auth = (secrets.user, secrets.whispir_password), data=payload,
-    # headers=headers,
+    headers=headers,
      params=querystring)
-
+    # embed()
+    # print(response.status_code, response.ok)
     print(response.text)
 
 
@@ -56,9 +62,7 @@ def send_with_attachments(recipients, path, success_count, fail_count):
     msg['From'] = fromaddr
     msg['To'] = ", ".join(recipients)
     msg['Subject'] = "SUBJECT OF THE EMAIL"
-
     body = "Blah blah"
-
     msg.attach(MIMEText(body, 'plain'))
 
     filename = "successes.csv"

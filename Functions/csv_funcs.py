@@ -1,5 +1,6 @@
 '''Functions for importing, exporting, transforming, and ecoding CSV file data.'''
 import csv, base64, json
+from IPython import embed
 
 def import_csv():
     return  open('mock.csv', 'rt')
@@ -21,13 +22,15 @@ def generate_csv(file_name, d_list, fieldnames):
 def encode_csv (path):
     with open(path, 'r') as f:
         s = f.read().encode('utf-8')
+        # print(s)
         b = base64.b64encode(s)
     return b
 def encode_json(j):
     '''Input JSON (list of dictionaries), output its B64 encoding'''
     s = json.dumps(j)
     b = s.encode('utf-8')
-    return base64.b64encode(b)
+    b_6_4 = base64.b64encode(b)
+    return b_6_4.decode('utf-8')
 
 def transform_columns (data, fn, target_columns ):
     '''
