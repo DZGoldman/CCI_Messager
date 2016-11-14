@@ -1,4 +1,4 @@
-'''
+    '''
 Testing suite
 '''
 import unittest, random, string

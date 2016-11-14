@@ -18,13 +18,7 @@ def generate_csv(file_name, d_list, fieldnames):
         dict_writer = csv.DictWriter(output_file, fieldnames = fieldnames)
         dict_writer.writeheader()
         dict_writer.writerows(d_list)
-
-def encode_csv (path):
-    with open(path, 'r') as f:
-        s = f.read().encode('utf-8')
-        # print(s)
-        b = base64.b64encode(s)
-    return b
+        
 def encode_json(j):
     '''Input JSON (list of dictionaries), output its B64 encoding'''
     s = json.dumps(j)
@@ -69,3 +63,6 @@ def filter_out_rows(data, test_fn, target_columns):
             new_list.append(row)
     data[:] = new_list
     return removed_elements
+
+def get_column_names(i_data):
+    return 'Cell number', '@@cci_language@@', '@@cci_location@@', '@@cci_start_time@@', '@@cci_end_time@@'

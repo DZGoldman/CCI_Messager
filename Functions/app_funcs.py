@@ -20,13 +20,6 @@ def send_to_api(filename, encoded_csv):
     url = "https://api.whispir.com/resources"
     querystring = {"apikey": secrets.key}
 
-    # payload ={
-    #     'name': filename,
-    #      "scope" : "private",
-    #      "mimeType" : "application/json",
-    #      "derefUri" : encoded_csv
-    # }
-    # print(encoded_csv)
     payload = "{\"name\":\"%s\",\"scope\":\"private\",\"mimeType\":\"application/json\", \"derefUri\":\"%s\" }" %(filename, encoded_csv)
 
     # print(encoded_csv)
@@ -41,39 +34,41 @@ def send_to_api(filename, encoded_csv):
      params=querystring)
     # embed()
     # print(response.status_code, response.ok)
-    print(response.text)
+    print(response)
+    return response
 
 
 # ['dzgoldman@wesleyan.edu', 'dannyg9917@gmail.com']
-def send_with_attachments(recipients, path, success_count, fail_count):
+def send_with_attachments(recipients, success_count=0, fail_count=0, success_file = None, fail_file= None, success=True, api_response = None):
+    # TODO - doc string
     '''
-    Sends mass email notification with csv of succesfully contacted records as attachment. Users smtplib and email modules
+    '''
 
-    param recipients(list): strings of email addresses
-    param path (str): path of csv file to be attached
-    param success_count (int): number of messages successfully sent out
-    param fail_count (int): number of messages that failed to send
-    returns: None
-    '''
+    def attach_file(msg, filename):
+        attachment = open(filename, "rb")
+        part = MIMEBase('application', 'octet-stream')
+        part.set_payload((attachment).read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+        msg.attach(part)
 
     fromaddr = secrets.email
     msg = MIMEMultipart()
 
     msg['From'] = fromaddr
     msg['To'] = ", ".join(recipients)
-    msg['Subject'] = "SUBJECT OF THE EMAIL"
-    body = "Blah blah"
+    report = 'Success!' if success else 'Some issues:'
+    msg['Subject'] = "Text Message Reminder Report: " + report
+
+    if success:
+        body = "Text message reminders have been send out! Of the %s records in the spreadsheet, %s had valid data and %s did not. See attachments for details." %( success_count + fail_count, success_count, fail_count)
+        if success_count: attach_file(msg, success_file)
+        if fail_count: attach_file(msg, fail_file)
+    else:
+        body = "There was an issue with sending the data to the whisper API. The response message is below: \n \n "+    api_response.text
+
+
     msg.attach(MIMEText(body, 'plain'))
-
-    filename = "successes.csv"
-    attachment = open(filename, "rb")
-
-    part = MIMEBase('application', 'octet-stream')
-    part.set_payload((attachment).read())
-    encoders.encode_base64(part)
-    part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-
-    msg.attach(part)
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()

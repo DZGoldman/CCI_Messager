@@ -1,35 +1,55 @@
+'''
+Main program file where where methods in Functions directory are called.
+'''
 from Functions.csv_funcs import *
 from Functions.app_funcs import *
 from Functions.data_funcs import *
 
+# Import data, and convert it to list of dictionaries format:
 csv_file = import_csv()
-i_data, columns =  jsonify(csv_file)
+data, columns =  jsonify(csv_file)
 
-transform_columns (i_data, validate_phone_number, target_columns = 'Cell number')
-transform_columns (i_data, set_language, target_columns= '@@cci_language@@')
-
-transform_columns (i_data, extract_alpha_num_digits,
-                    target_columns= ['@@cci_location@@', '@@cci_start_time@@', '@@cci_end_time@@'])
-
-removed_rows = filter_out_rows(i_data, is_null, ['@@cci_location@@','@@cci_start_time@@', '@@cci_end_time@@', 'Cell number'] )
-# make conditional
+# Set variables...
+# ...file names,
 new_file = 'CSV_Files/sucesses.csv'
+fail_file = 'CSV_Files/failures.csv'
+# ...recipients of notification emails,
+email_recipients = ['dzgoldman@wesleyan.edu','dannyg9917@gmail.com']
+# ...and column names
+phone_number_col, \
+language_col,   \
+location_col,  \
+start_time_col, \
+end_time_col = get_column_names(data)
 
-generate_csv(new_file, i_data, columns)
-generate_csv('CSV_Files/failures.csv', removed_rows, columns)
+# Sanitize data:
+transform_columns (data,
+                    validate_phone_number,
+                    target_columns = phone_number_col)
+transform_columns (data,
+                    set_language,
+                    target_columns= language_col)
+transform_columns (data,
+                    extract_alpha_num_digits,
+                    target_columns= [location_col, start_time_col, end_time_col])
 
+# Remove records with invalid data
+removed_rows = filter_out_rows(data,
+                is_null,
+                [location_col,start_time_col, end_time_col, phone_number_col] )
 
-# print(send_to_api.__doc__)
+# Create new CSV files (successes and failures)
+generate_csv(new_file, data, columns)
+generate_csv(fail_file ,removed_rows, columns)
 
-send_to_api(new_file,
-    # encode_csv(new_file)
-    encode_json(i_data)
-)
+# Send data to Whispir API:
+response = send_to_api(new_file, encode_json(data))
 
-
-# send_with_attachments(['dzgoldman@wesleyan.edu', 'dannyg9917@gmail.com'],new_file,len(i_data), len(removed_rows))
-
-
-# send to api
-# send emails
-# print(type(i_data) == pd.DataFrame)
+# Send notification emails:
+send_with_attachments(
+    email_recipients,
+    len(i_data), len(removed_rows),
+    success =response.ok,
+    api_response = response,
+    success_file = new_file,
+    fail_file =fail_file)
