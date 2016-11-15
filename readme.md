@@ -1,8 +1,25 @@
-Modifications should most likely be made in the main.py file or the data_funcs.py
+## Test Message Reminder Application
+
 
 #### Install Dependencies:
 ```
   pip install --upgrade -r requirements.txt
+```
+#### Set Environmental Variables:
+
+Environomental variables can be set by creating a file called 'secrets.py' in the application's root directory. The file should define the following string variables:
+
+```python
+# secrets.py file:
+
+# API authentication:
+key = "<Whispir API Key>"
+user = "<Whispir API user-name>"
+whispir_password = "<Whispir API password>"
+
+# For sending notification emails:
+email = "<Gmail address>"
+password = "<Gmail password>"
 ```
 
 #### Run Program:
@@ -10,7 +27,13 @@ Modifications should most likely be made in the main.py file or the data_funcs.p
 python main.py
 ```
 
+#### Modifying/ Expanding:
+
+Modifications should most likely be made in the main.py file or the data_funcs.py
+
 #### Testing:
+Tests are defined in the tests.py file.
+
 Run all tests:
 ```
   python tests.py

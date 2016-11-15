@@ -1,12 +1,13 @@
-    '''
-Testing suite
-'''
+'''Testing suite'''
 import unittest, random, string
 from Functions.data_funcs import *
 from Functions.csv_funcs import *
 
 class DataTests(unittest.TestCase):
-
+    def test_first_word(self):
+        self.assertFalse('')
+        self.assertTrue(first_word('Daniel'),'Daniel')
+        self.assertTrue(first_word(' Daniel AKA Batman  '), 'Daniel')
     def test_validate_phone_number (self):
         self.assertEqual(validate_phone_number  ('1.555.123.4567'), '15551234567')
         self.assertEqual(validate_phone_number  (' 555  123---4567  '), '15551234567')

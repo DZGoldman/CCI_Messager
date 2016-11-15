@@ -1,5 +1,7 @@
 '''
-Main program file where where methods in Functions directory are called.
+Main program file where where methods in the 'Functions' directory are called.
+
+Imports CSV, converts it to JSON-style format, sanitizes data, removed invallid records, sends data to Whispir, and sends notification emails.
 '''
 from Functions.csv_funcs import *
 from Functions.app_funcs import *
@@ -20,14 +22,19 @@ phone_number_col, \
 language_col,   \
 location_col,  \
 start_time_col, \
+last_name_col, \
 end_time_col = get_column_names(data)
 
 # Sanitize data:
+transform_columns(data,
+                    fn= first_word,
+                    target_columns = last_name_col)
+
 transform_columns (data,
-                    validate_phone_number,
+                    fn= validate_phone_number,
                     target_columns = phone_number_col)
 transform_columns (data,
-                    set_language,
+                    fn= set_language,
                     target_columns= language_col)
 transform_columns (data,
                     extract_alpha_num_digits,
@@ -35,13 +42,12 @@ transform_columns (data,
 
 # Remove records with invalid data
 removed_rows = filter_out_rows(data,
-                is_null,
-                [location_col,start_time_col, end_time_col, phone_number_col] )
+                test_fn= is_null,
+                target_columns= [location_col,start_time_col, end_time_col, phone_number_col] )
 
 # Create new CSV files (successes and failures)
 generate_csv(new_file, data, columns)
 generate_csv(fail_file ,removed_rows, columns)
-
 # Send data to Whispir API:
 response = send_to_api(new_file, encode_json(data))
 

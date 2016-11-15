@@ -10,7 +10,7 @@ from IPython import embed
 
 def send_to_api(filename, encoded_csv):
     '''
-    Sends data to Whispir API. Uses requests module
+    Sends data to Whispir API. Uses requests module.
 
     param filename (string): string of csv file oath
     param encoded_csv (bytes): csv file B64 encoded
@@ -40,10 +40,11 @@ def send_to_api(filename, encoded_csv):
 
 # ['dzgoldman@wesleyan.edu', 'dannyg9917@gmail.com']
 def send_with_attachments(recipients, success_count=0, fail_count=0, success_file = None, fail_file= None, success=True, api_response = None):
-    # TODO - doc string
     '''
+    Sends email notification of results. Uses smtplib and email modultes.
     '''
 
+    # Helper function for attaching a file
     def attach_file(msg, filename):
         attachment = open(filename, "rb")
         part = MIMEBase('application', 'octet-stream')

@@ -31,7 +31,10 @@ def extract_alpha_num_digits (string):
     ''' Strip all characters except alhpha numeric characeters (0-9, a-z) from a string.'''
     string = str(string)
     return re.sub('[\W_]', '', string)
-
+def first_word(string):
+    ''' Get substring until the first space'''
+    string = string.strip()
+    return string.split(' ')[0]
 
 def is_null(x):
     '''Determines if input value is null, returns Boolean'''
