@@ -6,7 +6,41 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 from IPython import embed
+def send_to_api_2(filename, encoded_csv):
+    '''
+    Sends data to Whispir API. Uses requests module.
 
+    param filename (string): string of csv file oath
+    param encoded_csv (bytes): csv file B64 encoded
+    returns: HTTP response object
+    '''
+
+    url = "https://api.whispir.com/resources"
+    querystring = {"apikey": secrets.key}
+
+    payload = {
+      "name" : 'test',
+      "scope" : "private",
+      "mimeType" : "application/csv",
+      "derefUri" : encoded_csv
+      }
+    # print(encoded_csv)
+    headers = {
+        'accept': "application/vnd.whispir.resource-v1+csv",
+        'content-type': "application/vnd.whispir.resource-v1+csv"
+        }
+
+    response = requests.post( url,
+    auth = (secrets.user, secrets.whispir_password),
+    json = payload,
+    # data = encoded_csv,
+    headers=headers,
+    params=querystring)
+
+    # print(response.status_code, response.ok)
+    # embed()
+    print(response.text)
+    return respons
 
 def send_to_api(filename, encoded_csv):
     '''
@@ -20,21 +54,28 @@ def send_to_api(filename, encoded_csv):
     url = "https://api.whispir.com/resources"
     querystring = {"apikey": secrets.key}
 
-    payload = "{\"name\":\"%s\",\"scope\":\"private\",\"mimeType\":\"application/json\", \"derefUri\":\"%s\" }" %(filename, encoded_csv)
-
+    payload = {
+      "name" : 'test',
+      "scope" : "private",
+      "mimeType" : "application/json",
+      "derefUri" : encoded_csv
+      }
     # print(encoded_csv)
     headers = {
-
         'accept': "application/vnd.whispir.resource-v1+json",
         'content-type': "application/vnd.whispir.resource-v1+json"
         }
 
-    response = requests.post( url, auth = (secrets.user, secrets.whispir_password), data=payload,
+    response = requests.post( url,
+    auth = (secrets.user, secrets.whispir_password),
+    json = payload,
+    # data = encoded_csv,
     headers=headers,
-     params=querystring)
-    # embed()
+    params=querystring)
+
     # print(response.status_code, response.ok)
-    print(response)
+    # embed()
+    print(response.text)
     return response
 
 

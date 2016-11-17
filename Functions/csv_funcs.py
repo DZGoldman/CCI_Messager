@@ -26,6 +26,13 @@ def encode_json(j):
     b_6_4 = base64.b64encode(b)
     return b_6_4.decode('utf-8')
 
+def write_json_file():
+    with open('data.txt', 'w') as outfile:
+    json.dump(data, outfile)
+
+def encode_csv():
+    f = open('./CSV_Files/sucesses.csv', 'rb')
+    return base64.b64encode(f.read())
 def transform_columns (data, fn, target_columns ):
     '''
     Meta-function that transforms JSON data in place by operating callbuck function on target column.

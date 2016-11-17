@@ -50,12 +50,13 @@ generate_csv(new_file, data, columns)
 generate_csv(fail_file ,removed_rows, columns)
 # Send data to Whispir API:
 response = send_to_api(new_file, encode_json(data))
+# response = send_to_api_2(new_file, encode_csv())
 
 # Send notification emails:
-send_with_attachments(
-    email_recipients,
-    len(i_data), len(removed_rows),
-    success =response.ok,
-    api_response = response,
-    success_file = new_file,
-    fail_file =fail_file)
+# send_with_attachments(
+#     email_recipients,
+#     len(data), len(removed_rows),
+#     success =response.ok,
+#     api_response = response,
+#     success_file = new_file,
+#     fail_file =fail_file)
