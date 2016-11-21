@@ -3,7 +3,8 @@ import csv, base64, json
 from IPython import embed
 
 def import_csv():
-    return  open('mock.csv', 'rt')
+    ''' Import list of contacts to message'''
+    return  open('Test_Inputs/test_new_me.csv', 'rt')
 
 def jsonify(i_file):
     ''' Convert CSV file into JSON-style python object (list of dictionaries with keys as columns)
@@ -14,6 +15,14 @@ def jsonify(i_file):
     return [row for  row in d_file], fieldnames
 
 def generate_csv(file_name, d_list, fieldnames):
+    '''
+    Creates csv file from list of dictionaries (JSON_format)
+
+    param file_name (string): File path
+    param d_list (list): Data as list of dictionaries
+    param fieldnames (list): List of column names to preserve column order
+    returns: None
+    '''
     with open(file_name, 'w') as output_file:
         dict_writer = csv.DictWriter(output_file, fieldnames = fieldnames)
         dict_writer.writeheader()
@@ -26,13 +35,6 @@ def encode_json(j):
     b_6_4 = base64.b64encode(b)
     return b_6_4.decode('utf-8')
 
-def write_json_file():
-    with open('data.txt', 'w') as outfile:
-    json.dump(data, outfile)
-
-def encode_csv():
-    f = open('./CSV_Files/sucesses.csv', 'rb')
-    return base64.b64encode(f.read())
 def transform_columns (data, fn, target_columns ):
     '''
     Meta-function that transforms JSON data in place by operating callbuck function on target column.
@@ -70,6 +72,3 @@ def filter_out_rows(data, test_fn, target_columns):
             new_list.append(row)
     data[:] = new_list
     return removed_elements
-
-def get_column_names(i_data):
-    return 'Cell number', '@@cci_language@@', '@@cci_location@@', '@@cci_start_time@@', '@@cci_end_time@@', '@@cci_lastname@@'

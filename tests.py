@@ -21,10 +21,11 @@ class DataTests(unittest.TestCase):
         self.assertFalse('')
         self.assertEqual(extract_alpha_num_digits   ('1234567890!@#$%^&*()'), '1234567890' )
         self.assertEqual(extract_alpha_num_digits   ('{}|:"<>?"asdfghjkl'), 'asdfghjkl' )
-
+        self.assertEqual(extract_alpha_num_digits('2123 sstreet street'), '2123 sstreet street')
     def test_set_language(self):
         self.assertEqual(set_language   (''),'english')
         self.assertEqual(set_language   ('SPANISH'),'spanish')
+        self.assertEqual(set_language   ('ES'),'spanish')
         for _ in range(10):
             self.assertEqual( set_language  (self.randomstring(8)),'english' )
 
@@ -32,7 +33,11 @@ class DataTests(unittest.TestCase):
         self.assertTrue(is_null(''))
         self.assertTrue(is_null(None))
         self.assertFalse(is_null(0))
-
+    def test_validate_email(self):
+        for bad_email in ['dan, dan@@aol.com, danny.aol@com, dan@gmail']:
+            self.assertFalse(validate_email(bad_email))
+        for good_email in ['dan@gmail.com', 'dan234@nycourts.edu', 'dan12345@aol.com']:
+            self.assertEqual( validate_email(good_email), good_email)
     def randomstring(self, length):
         return ''.join(random.choice(string.ascii_letters) for i in range(length))
 

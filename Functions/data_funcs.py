@@ -1,12 +1,18 @@
-'''Low level data manipulation functions - string manipulation and format converison.'''
+'''Low level raw data manipulation functions - string manipulation and format converison.'''
 import re
 
 def set_language(lang_string, default_language = 'english'):
     ''' Convert language string into "spanish" or a default language ("english" by default)'''
-    if lang_string.lower() == 'spanish':
+    if lang_string.lower() in ['spanish', 'es']:
         return 'spanish'
     else:
         return default_language
+def validate_email(email_str):
+    ''' Input email as string, return empty string if email format is improper'''
+    if re.match(r"[^@]+@[^@]+\.[^@]+", email_str):
+        return email_str
+    else:
+        return ''
 
 def extract_digits (string):
     ''' Stript all characters except digits 0-9 from string'''
@@ -16,7 +22,7 @@ def extract_digits (string):
 def validate_phone_number(phone_number):
     '''Input phone_number (string) in any format and return string in '1-XXXXXXXXXX' format.
 
-    Note: Uses 'extract digits' function
+    Note: Uses 'extract_digits' function
     '''
     digits = extract_digits(phone_number)
     digit_count = len(digits)
@@ -28,9 +34,10 @@ def validate_phone_number(phone_number):
         return ''
 
 def extract_alpha_num_digits (string):
-    ''' Strip all characters except alhpha numeric characeters (0-9, a-z) from a string.'''
-    string = str(string)
-    return re.sub('[\W_]', '', string)
+    ''' Strip all characters except alhpha numeric characeters (0-9, a-z) and spaces from a string.'''
+    string = str(string).strip()
+    return re.sub('([^\s\w]|_)+', '', string)
+
 def first_word(string):
     ''' Get substring until the first space'''
     string = string.strip()

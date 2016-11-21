@@ -2,6 +2,7 @@
 
 
 #### Install Dependencies:
+This app uses Python 3.5; it should work with any version of Python > 3.
 ```
   pip install --upgrade -r requirements.txt
 ```

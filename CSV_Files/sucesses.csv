@@ -1,7 +1,2 @@
-@@cci_firstinitial@@,@@cci_lastname@@,Cell number,@@cci_service@@,@@cci_location@@,@@cci_start_time@@,@@cci_end_time@@,@@cci_interviewid@@,@@cci_language@@,@@cci_group@@
-T,Pooler,16462885477,CS: Crew 1,infrontof198e161st,400PM,7:00PM,320ab,english,1
-T,Pooler,16462885478,CS: Crew/Worldvision,FordhamRoadandUniversityAvenue,800AM,2:00PM,30240f,spanish,2
-S,Balasubramanyam,16462900964,ADP: (Crew )Summer Community Service-1PM,infrontof198e161st,400PM,7:00PM,0495s,english,1
-S,Balasubramanyam,16462900964,CS:  Midtown Community Court,FordhamRoadandUniversityAvenue,800AM,2:00PM,3492c,spanish,1
-J,Petersen,12817722054,CS: St.Mary's Park,infrontof198e161st,400PM,7:00PM,3004s,english,2
-J,Petersen,12817722054,CS: Parks Department-River Ave Site,FordhamRoadandUniversityAvenue,800AM,2:00PM,2x203,spanish,2
+EPISODE_ID,cci_firstinitial,cci_lastname,mobile,cci_service,cci_location,cci_starttime,cci_endtime,cci_interviewid,cci_language,cci_group,email
+212980,Z,BROWN,13054968264,CS: D.O.T 3 (Step Streets - 165 Street & Carroll Place),165th Street and Carroll Place Van parked in front of the step streets,800 AM,200 PM,188398,english,2,
