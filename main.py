@@ -3,19 +3,20 @@ Main program file where where methods in the 'Functions' directory are called.
 
 Imports CSV, converts it to JSON-style format, sanitizes data, removed invallid records, sends data to Whispir, and sends notification emails.
 '''
+import os
 from Functions.csv_funcs import *
 from Functions.api_funcs import *
 from Functions.data_funcs import *
 from Functions.email_funcs import *
-
+path_prefix = os.path.dirname(os.path.abspath(__file__))
 # Import data, and convert it to list of dictionaries format:
-csv_file = import_csv()
+csv_file = open( path_prefix + '/Test_Inputs/test_new_me.csv', 'rt')
 data, columns =  jsonify(csv_file)
 
 # Set variables...
 # ...file names,
-new_file = 'CSV_Files/sucesses.csv'
-fail_file = 'CSV_Files/failures.csv'
+new_file = path_prefix + '/CSV_Files/sucesses.csv'
+fail_file = path_prefix + '/CSV_Files/failures.csv'
 # ...recipients of notification emails,
 email_recipients = ['dzgoldman@wesleyan.edu','dannyg9917@gmail.com']
 # ...and column names
@@ -39,7 +40,7 @@ transform_columns (data, fn= validate_phone_number,
 transform_columns (data, fn= set_language,
                     target_columns= language_col)
 transform_columns (data, fn = extract_alpha_num_digits,
-                    target_columns= [location_col, start_time_col, end_time_col, first_initial_col])
+                    target_columns= [location_col, first_initial_col])
 transform_columns (data, fn = validate_email,
                     target_columns= email_col)
 
@@ -56,4 +57,4 @@ generate_csv(fail_file ,removed_rows, columns)
 response = send_messages( encode_json(data), cci_template)
 
 # Send notification emails:
-send_with_attachments( email_recipients,len(data), len(removed_rows),success =response.ok,api_response = response,success_file = new_file,fail_file =fail_file)
+# send_with_attachments( email_recipients,len(data), len(removed_rows),success =response,api_response = response,success_file = new_file,fail_file =fail_file)

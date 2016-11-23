@@ -1,10 +1,9 @@
 '''Functions for importing, exporting, transforming, and ecoding CSV file data.'''
 import csv, base64, json
-from IPython import embed
 
-def import_csv():
-    ''' Import list of contacts to message'''
-    return  open('Test_Inputs/test_new_me.csv', 'rt')
+# def import_csv():
+#     ''' Import list of contacts to message'''
+#     return  open('Test_Inputs/test_new_me.csv', 'rt')
 
 def jsonify(i_file):
     ''' Convert CSV file into JSON-style python object (list of dictionaries with keys as columns)

@@ -1,7 +1,6 @@
 ''' Miscelaneous application functions, that deal with higher level functionality (sending email, making API requests, etc)'''
 
-import requests, secrets, smtplib, json
-from IPython import embed
+import requests, secrets, json
 
 base_url = "https://api.whispir.com/workspaces/1992E463B84A38AF/%s"
 auth = (secrets.user, secrets.whispir_password)
@@ -74,4 +73,4 @@ def post_messages(resource_id, template_id= None):
 
     response = requests.post(url,json = payload,auth = auth,headers = headers,params = querystring)
     print('message post status code:', response.status_code)
-    return response.text
+    return response
