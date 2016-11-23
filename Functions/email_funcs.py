@@ -42,3 +42,4 @@ def send_with_attachments(recipients, success_count=0, fail_count=0, success_fil
     text = msg.as_string()
     server.sendmail(fromaddr, recipients, text)
     server.quit()
+    print('email sent!')
