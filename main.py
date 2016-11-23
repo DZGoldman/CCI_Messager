@@ -57,4 +57,4 @@ generate_csv(fail_file ,removed_rows, columns)
 response = send_messages( encode_json(data), cci_template)
 
 # Send notification emails:
-# send_with_attachments( email_recipients,len(data), len(removed_rows),success =response,api_response = response,success_file = new_file,fail_file =fail_file)
+send_with_attachments( email_recipients,len(data), len(removed_rows),success =response,api_response = response,success_file = new_file,fail_file =fail_file)
