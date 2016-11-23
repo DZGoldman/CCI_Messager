@@ -1,4 +1,4 @@
-EPISODE_ID,cci_firstinitial,cci_lastname,mobile,cci_service,cci_location,cci_starttime,cci_endtime,cci_interviewid,cci_language,cci_group,email
+EPISODE_ID,cci_firstInitial,cciLastname,mobile,cciService,cciLocation,cciStartTime,cciEndTime,cciInterviewID,cciLanguage,cciGroup,email
 213145,B.,BROWN,55555555555477,CS: D.O.T 3 (Step Streets - 165 Street & Carroll Place),165th Street and Carroll Place (Van parked in front of the step streets). ,8:00 AM,2:00 PM,218702,EN,2,
 212980,Z.,BROWN GREEN,305a49a682a64,CS: D.O.T 3 (Step Streets - 165 Street & Carroll Place),165th Street and Carroll Place (Van parked in front of the step streets). ,8:00 AM,2:00 PM,188398,En,2,
 212413,Q.,GREEN,16554,CS: D.O.T 1 (161 Street & Walton Avenue),On the corner of East. 161st and Walton ave,8:00 AM,3:00 PM,174196,EN,1,

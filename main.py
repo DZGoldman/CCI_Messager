@@ -21,12 +21,12 @@ fail_file = path_prefix + '/CSV_Files/failures.csv'
 email_recipients = ['dzgoldman@wesleyan.edu','dannyg9917@gmail.com']
 # ...and column names
 phone_number_col = 'mobile'
-language_col = 'cci_language'
-location_col = 'cci_location'
-start_time_col = 'cci_starttime'
-first_initial_col = 'cci_firstinitial'
-last_name_col = 'cci_lastname'
-end_time_col = 'cci_endtime'
+language_col = 'cciLanguage'
+location_col = 'cciLocation'
+start_time_col = 'cciStartTime'
+first_initial_col = 'cciFirstInitial'
+last_name_col = 'cciLastName'
+end_time_col = 'cciEndTime'
 email_col = 'email'
 cci_template = '6DBC01BE80705741'
 
