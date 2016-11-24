@@ -35,8 +35,8 @@ def send_with_attachments(recipients, success_count=0, fail_count=0, success_fil
 
 
     msg.attach(MIMEText(body, 'plain'))
-
-    server = smtplib.SMTP('smtp.gmail.com', 587)
+    # 'smtp.gmail.com'
+    server = smtplib.SMTP('smtp-mail.outlook.com', 587)
     server.starttls()
     server.login(fromaddr, secrets.password)
     text = msg.as_string()
