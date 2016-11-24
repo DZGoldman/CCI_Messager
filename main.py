@@ -4,6 +4,7 @@ Main program file where where methods in the 'Functions' directory are called.
 Imports CSV, converts it to JSON-style format, sanitizes data, removed invallid records, sends data to Whispir, and sends notification emails.
 '''
 import os
+from inputs import current_template, current_email_recs
 from Functions.csv_funcs import *
 from Functions.api_funcs import *
 from Functions.data_funcs import *
@@ -12,13 +13,13 @@ path_prefix = os.path.dirname(os.path.abspath(__file__))
 # Import data, and convert it to list of dictionaries format:
 csv_file = open( path_prefix + '/Test_Inputs/test_new_me.csv', 'rt')
 data, columns =  jsonify(csv_file)
-
+print(current_email_recs)
 # Set variables...
 # ...file names,
 new_file = path_prefix + '/CSV_Files/sucesses.csv'
 fail_file = path_prefix + '/CSV_Files/failures.csv'
 # ...recipients of notification emails,
-email_recipients = ['dannyg9917@gmail.com']
+# current_email_recs = ['dannyg9917@gmail.com']
 # ...and column names
 phone_number_col = 'mobile'
 language_col = 'cciLanguage'
@@ -28,7 +29,7 @@ first_initial_col = 'cciFirstInitial'
 last_name_col = 'cciLastName'
 end_time_col = 'cciEndTime'
 email_col = 'email'
-cci_template = '6DBC01BE80705741'
+# current_template = '6DBC01BE80705741'
 
 
 # Sanitize data:
@@ -54,7 +55,7 @@ generate_csv(new_file, data, columns)
 generate_csv(fail_file ,removed_rows, columns)
 
 # Send data to Whispir API:
-response = send_messages( encode_json(data), cci_template)
+response = send_messages( encode_json(data), current_template)
 
 # Send notification emails:
-send_with_attachments( email_recipients,len(data), len(removed_rows),success =response,api_response = response,success_file = new_file,fail_file =fail_file)
+send_with_attachments( current_email_recs,len(data), len(removed_rows),success =response,api_response = response,success_file = new_file,fail_file =fail_file)
