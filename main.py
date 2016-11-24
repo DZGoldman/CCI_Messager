@@ -18,7 +18,7 @@ data, columns =  jsonify(csv_file)
 new_file = path_prefix + '/CSV_Files/sucesses.csv'
 fail_file = path_prefix + '/CSV_Files/failures.csv'
 # ...recipients of notification emails,
-email_recipients = ['dzgoldman@wesleyan.edu','dannyg9917@gmail.com']
+email_recipients = ['dannyg9917@gmail.com']
 # ...and column names
 phone_number_col = 'mobile'
 language_col = 'cciLanguage'
