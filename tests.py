@@ -7,7 +7,7 @@ class DataTests(unittest.TestCase):
     def test_first_word(self):
         self.assertFalse('')
         self.assertTrue(first_word('Daniel'),'Daniel')
-        self.assertTrue(first_word(' Daniel AKA Batman  '), 'Daniel')
+        self.assertTrue(first_word('Daniel AKA Batman  '), 'Daniel')
     def test_validate_phone_number (self):
         self.assertEqual(validate_phone_number  ('1.555.123.4567'), '15551234567')
         self.assertEqual(validate_phone_number  (' 555  123---4567  '), '15551234567')
@@ -38,6 +38,11 @@ class DataTests(unittest.TestCase):
             self.assertFalse(validate_email(bad_email))
         for good_email in ['dan@gmail.com', 'dan234@nycourts.edu', 'dan12345@aol.com']:
             self.assertEqual( validate_email(good_email), good_email)
+    def test_remove_final_punctuation(self):
+        self.assertFalse(remove_final_punctuation(''))
+        self.assertEqual(remove_final_punctuation('my sentence.'), 'my sentence')
+        self.assertEqual(remove_final_punctuation('my sentence!'), 'my sentence')
+
     def randomstring(self, length):
         return ''.join(random.choice(string.ascii_letters) for i in range(length))
 

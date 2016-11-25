@@ -35,14 +35,25 @@ def validate_phone_number(phone_number):
 
 def extract_alpha_num_digits (string):
     ''' Strip all characters except alhpha numeric characeters (0-9, a-z) and spaces from a string.'''
-    string = str(string).strip()
+    # string = str(string).strip()
     return re.sub('([^\s\w]|_)+', '', string)
 
 def first_word(string):
     ''' Get substring until the first space'''
-    string = string.strip()
+    # string = string.strip()
     return string.split(' ')[0]
+
+def strip_white_space(string):
+    return string.strip()
 
 def is_null(x):
     '''Determines if input value is null, returns Boolean'''
     return True if (not x) and (x !=0) else False
+
+def remove_final_punctuation(string):
+    '''Remove punctuation at end of input, if it exists'''
+    if string == '': return ''
+    elif string[-1] in ['.', '!', '?']:
+        return string[: -1 ]
+    else:
+        return string

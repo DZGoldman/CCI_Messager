@@ -33,15 +33,22 @@ email_col = 'email'
 
 
 # Sanitize data:
+
+transform_columns(data, fn = strip_white_space,
+                        target_columns = [phone_number_col, language_col,location_col, start_time_col,first_initial_col,last_name_col,end_time_col,email_col])
+
 transform_columns(data, fn= first_word,
                     target_columns = last_name_col)
-
 transform_columns (data, fn= validate_phone_number,
                     target_columns = phone_number_col)
+
 transform_columns (data, fn= set_language,
                     target_columns= language_col)
+
 transform_columns (data, fn = extract_alpha_num_digits,
-                    target_columns= [location_col, first_initial_col])
+                    target_columns= first_initial_col)
+transform_columns(data, fn = remove_final_punctuation,
+                    target_columns = location_col)
 transform_columns (data, fn = validate_email,
                     target_columns= email_col)
 
