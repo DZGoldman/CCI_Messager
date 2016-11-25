@@ -3,6 +3,8 @@ Define variables to use as command line arguments for template, email contacts, 
 '''
 import sys
 
+# Add new variables below:
+
 # Whispir API templatees
 appt_template = '6DBC01BE80705741'
 my_other_template = 'FAKEFAKEFAKE@#$@#$@#$'
@@ -18,8 +20,16 @@ default_file = 'success.csv'
 
 
 
-
-
-current_template = eval(sys.argv[1])
-current_email_recs = eval(sys.argv[2])
-current_file_name = eval(sys.argv[3])
+# Don't touch anything below!!!
+try:
+    current_template = eval(sys.argv[1])
+except:
+    sys.exit('Invalid template command line argument (arg 1)')
+try:
+    current_email_recs = eval(sys.argv[2])
+except:
+    sys.exit('Invalid email-list command line argument (arg 2)')
+try:
+    current_file_name = eval(sys.argv[3])
+except:
+    sys.exit('Invalid file-name command line argument (arg 3)' )
