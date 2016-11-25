@@ -25,7 +25,7 @@ password = "<Gmail password>"
 
 #### Run Program:
 ```
-python main.py appt_template email_list_1
+python main.py appt_template email_list_1 default_file
 ```
 The command line arguments (after main.py) refer to variables defined in the inputs.py file:
 

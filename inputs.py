@@ -1,5 +1,5 @@
 '''
-Define variables to use as command line arguments
+Define variables to use as command line arguments for template, email contacts, and file name
 '''
 import sys
 
@@ -9,7 +9,7 @@ my_other_template = 'FAKEFAKEFAKE@#$@#$@#$'
 
 #  Contact lists (to receieve notification email)
 email_list_1 = ['dannyg9917@gmail.com', 'dzgoldman@wesleyan.edu']
-email_list_2 = ['dude@fake.com', 'person@whatever.gov']
+alternative_email_list = ['dude@fake.com', 'person@whatever.gov']
 
 # File names (for new CSV_file)
 default_file = 'success.csv'
