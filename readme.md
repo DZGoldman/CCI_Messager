@@ -8,7 +8,7 @@ This app uses Python 3.5; it should work with any version of Python > 3.
 ```
 #### Set Environmental Variables:
 
-Environomental variables can be set by creating a file called 'secrets.py' in the application's root directory. The file should define the following string variables:
+Environmental variables can be set by creating a file called 'secrets.py' in the application's root directory. The file should define the following string variables:
 
 ```python
 # secrets.py file:
@@ -27,6 +27,18 @@ password = "<Gmail password>"
 ```
 python main.py appt_template email_list_1
 ```
+The command line arguments (after main.py) refer to variables defined in the inputs.py file:
+
+1st (string): ID of template on the Whisipr API.
+
+2nd (list of strings): Email addresses to receive notification email.
+
+3rd (string): Name of new CSV file to be created
+
+See the inputs.py file for examples. Additional variables for any of the 3 arguments can be added to that file; just make sure each of the command line arguments corresponds to a variable in inputs.py when the application is run.
+
+
+
 
 #### Modifying/ Expanding:
 
