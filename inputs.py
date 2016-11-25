@@ -1,6 +1,13 @@
 import sys
-cci_template = '6DBC01BE80705741'
-email_list = ['dannyg9917@gmail.com', 'dzgoldman@wesleyan.edu']
+appt_template = '6DBC01BE80705741'
+
+email_list_1 = ['dannyg9917@gmail.com', 'dzgoldman@wesleyan.edu']
+
+
+
+
+
+
 
 
 

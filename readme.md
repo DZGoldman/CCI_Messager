@@ -25,7 +25,7 @@ password = "<Gmail password>"
 
 #### Run Program:
 ```
-python main.py
+python main.py appt_template email_list_1
 ```
 
 #### Modifying/ Expanding:
