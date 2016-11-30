@@ -3,7 +3,9 @@
 This application inputs a csv file, an ID of a template from the Whispir API, a list of email contacts, and a file name; it sanitizes the CSV file, sends the data to the template on Whispir, and sends emails notifications to all constacts on the inputed list
 
 #### Install Dependencies:
-This app uses Python 3.5; it should work with any version of Python > 3.
+This app uses Python 3.5.
+
+It uses the requests module version 2.8.1. If can be installed via pip as follows:
 ```
   pip install --upgrade -r requirements.txt
 ```
