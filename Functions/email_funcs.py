@@ -4,20 +4,29 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
+
+def attach_file(msg, filename):
+    ''' Helper function for send_with_attachments: attach file to email
+
+    param msg( MIMEMultipart): message Object
+    param filename(string): name of file to be attached
+    '''
+    attachment = open(filename, "rb")
+    part = MIMEBase('application', 'octet-stream')
+    part.set_payload((attachment).read())
+    encoders.encode_base64(part)
+    part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+    msg.attach(part)
+
 def send_with_attachments(recipients, success_count=0, fail_count=0, success_file = None, fail_file= None, success=True, api_response = None):
     '''
-    Sends email notification of results. Uses smtplib and email modultes.
+    Sends email notification of results. Uses smtplib and email modules.
+
+    param recipients (string): List of strings of email recipients
+    params success_count, fail_count (integers): Number of successes/failures
+    params success_file, fail_file (strings): New file names
+    api_response (response object): Response object returned from Whispir API
     '''
-
-    # Helper function for attaching a file
-    def attach_file(msg, filename):
-        attachment = open(filename, "rb")
-        part = MIMEBase('application', 'octet-stream')
-        part.set_payload((attachment).read())
-        encoders.encode_base64(part)
-        part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-        msg.attach(part)
-
     fromaddr = secrets.email
     msg = MIMEMultipart()
 
@@ -33,9 +42,7 @@ def send_with_attachments(recipients, success_count=0, fail_count=0, success_fil
     else:
         body = "There was an issue with sending the data to the whisper API. The response message is below: \n \n "+    api_response.text
 
-
     msg.attach(MIMEText(body, 'plain'))
-    # 'smtp.gmail.com'
     server = smtplib.SMTP('smtp.office365.com', 587)
     server.starttls()
     server.login(fromaddr, secrets.password)

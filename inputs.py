@@ -21,6 +21,7 @@ default_file = 'success.csv'
 
 
 # Don't touch anything below!!!
+# Catches missing/undefined command line arguments
 try:
     current_template = eval(sys.argv[1])
 except:

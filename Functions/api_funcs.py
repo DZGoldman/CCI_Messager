@@ -11,7 +11,7 @@ def send_messages ( encoded_csv, template_id):
         Uses create_resource, get_resource_id, and post_messages
         param encoded_csv (bytes): base64 encoded JSON object of file
         param template_id (string): id of template to use for messages
-        returns: text response of final post request
+        returns: response object of final post request
     '''
     response = create_resource( encoded_csv)
     resource_id = get_resource_id(response)
@@ -33,7 +33,6 @@ def create_resource( encoded_csv):
       "mimeType" : "application/json",
       "derefUri" : encoded_csv
       }
-    # print(encoded_csv)
     headers = {
         'accept': "application/vnd.whispir.resource-v1+json",
         'content-type': "application/vnd.whispir.resource-v1+json"

@@ -1,5 +1,6 @@
 ## Test Message Reminder Application
 
+This application inputs a csv file, an ID of a template from the Whispir API, a list of email contacts, and a file name; it sanitizes the CSV file, sends the data to the template on Whispir, and sends emails notifications to all constacts on the inputed list
 
 #### Install Dependencies:
 This app uses Python 3.5; it should work with any version of Python > 3.
@@ -40,9 +41,14 @@ See the inputs.py file for examples. Additional variables for any of the 3 argum
 
 
 
-#### Modifying/ Expanding:
+#### File Structure:
+Methods are defined in the modules in the Functions directory.
 
-Modifications should most likely be made in the main.py file or the data_funcs.py
+The program's methods are all called in the main.py file.
+
+The lowest level methods (string/integer functions) are defined in the data_funcs.py file.
+
+These two files (main.py and data_funcs.py) are the files in which any additional modifications would most likely take place.
 
 #### Testing:
 Tests are defined in the tests.py file.

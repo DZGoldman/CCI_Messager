@@ -10,10 +10,11 @@ from Functions.api_funcs import *
 from Functions.data_funcs import *
 from Functions.email_funcs import *
 path_prefix = os.path.dirname(os.path.abspath(__file__))
+
 # Import data, and convert it to list of dictionaries format:
 csv_file = open( path_prefix + '/Test_Inputs/test_new_me.csv', 'rt')
 data, columns =  jsonify(csv_file)
-print(current_email_recs)
+
 # Set variables...
 # ...file names,
 new_file = path_prefix + '/CSV_Files/' + current_file_name
@@ -29,14 +30,10 @@ first_initial_col = 'cciFirstInitial'
 last_name_col = 'cciLastName'
 end_time_col = 'cciEndTime'
 email_col = 'email'
-# current_template = '6DBC01BE80705741'
-
 
 # Sanitize data:
-
 transform_columns(data, fn = strip_white_space,
                         target_columns = [phone_number_col, language_col,location_col, start_time_col,first_initial_col,last_name_col,end_time_col,email_col])
-
 transform_columns(data, fn= first_word,
                     target_columns = last_name_col)
 transform_columns (data, fn= validate_phone_number,
@@ -65,4 +62,4 @@ generate_csv(fail_file ,removed_rows, columns)
 response = send_messages( encode_json(data), current_template)
 
 # Send notification emails:
-send_with_attachments( current_email_recs,len(data), len(removed_rows),success =response,api_response = response,success_file = new_file,fail_file =fail_file)
+send_with_attachments( current_email_recs,len(data), len(removed_rows),success =response, api_response = response,success_file = new_file,fail_file =fail_file)
