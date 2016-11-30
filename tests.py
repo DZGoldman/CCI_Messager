@@ -6,13 +6,15 @@ from Functions.csv_funcs import *
 class DataTests(unittest.TestCase):
     def test_first_word(self):
         self.assertFalse('')
-        self.assertTrue(first_word('Daniel'),'Daniel')
-        self.assertTrue(first_word('Daniel AKA Batman  '), 'Daniel')
+        self.assertEqual(first_word('Daniel'),'Daniel')
+        self.assertEqual(first_word('Daniel AKA Batman  '), 'Daniel')
+
     def test_validate_phone_number (self):
         self.assertEqual(validate_phone_number  ('1.555.123.4567'), '15551234567')
         self.assertEqual(validate_phone_number  (' 555  123---4567  '), '15551234567')
         self.assertFalse(validate_phone_number(''))
         self.assertFalse(validate_phone_number('123-4567'))
+        # random number test: 1 + any random 10 digits should yield a valid phone number
         for _ in range(10):
             rand_digit_string = str(random.randint(1000000000,9999999999))
             self.assertEqual(validate_phone_number(rand_digit_string), '1' +rand_digit_string )
@@ -22,10 +24,12 @@ class DataTests(unittest.TestCase):
         self.assertEqual(extract_alpha_num_digits   ('1234567890!@#$%^&*()'), '1234567890' )
         self.assertEqual(extract_alpha_num_digits   ('{}|:"<>?"asdfghjkl'), 'asdfghjkl' )
         self.assertEqual(extract_alpha_num_digits('2123 sstreet street'), '2123 sstreet street')
+
     def test_set_language(self):
         self.assertEqual(set_language   (''),'english')
         self.assertEqual(set_language   ('SPANISH'),'spanish')
         self.assertEqual(set_language   ('ES'),'spanish')
+        # random string test: any string (that isn't "ES" or "Spanish") becomes English
         for _ in range(10):
             self.assertEqual( set_language  (self.randomstring(8)),'english' )
 
@@ -33,11 +37,13 @@ class DataTests(unittest.TestCase):
         self.assertTrue(is_null(''))
         self.assertTrue(is_null(None))
         self.assertFalse(is_null(0))
+
     def test_validate_email(self):
         for bad_email in ['dan, dan@@aol.com, danny.aol@com, dan@gmail']:
             self.assertFalse(validate_email(bad_email))
         for good_email in ['dan@gmail.com', 'dan234@nycourts.edu', 'dan12345@aol.com']:
             self.assertEqual( validate_email(good_email), good_email)
+            
     def test_remove_final_punctuation(self):
         self.assertFalse(remove_final_punctuation(''))
         self.assertEqual(remove_final_punctuation('my sentence.'), 'my sentence')
