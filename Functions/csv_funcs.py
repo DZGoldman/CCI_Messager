@@ -1,6 +1,6 @@
 '''Functions for importing, exporting, transforming, and ecoding CSV file data.'''
 import csv, base64, json
-
+from IPython import embed
 def jsonify(i_file):
     ''' Convert CSV file into JSON-style python object (list of dictionaries with keys as columns)
     returns: JSON-list object and column names (as a tuple). Column names are returns so that their order can be referenced later
