@@ -12,7 +12,7 @@ from Functions.email_funcs import *
 path_prefix = os.path.dirname(os.path.abspath(__file__))
 
 # Import data, and convert it to list of dictionaries format:
-csv_file = open( path_prefix + '/Test_Inputs/test_new_me.csv', 'rt')
+csv_file = open( path_prefix + '/Test_Inputs/test_new_me.csv', 'rt', encoding="latin-1")
 data, columns =  jsonify(csv_file)
 
 # Set variables...
