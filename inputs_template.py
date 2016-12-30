@@ -1,11 +1,14 @@
 '''
 Define variables to use as command line arguments for template, email contacts, and file name
 '''
-import sys
+import sys, os
+path_prefix = os.path.dirname(os.path.abspath(__file__))
+# Set path of imported CSV_file (path_prefix varaible is path to root directory)
+imported_file_path = path_prefix +  '/Test_Inputs/test_new_me.csv'
+
 
 # Add new variables below:
 
-imported_file_name = 'Test_Inputs/other_test.csv'
 # Whispir API templatees
 appt_template = '6DBC01BE80705741'
 my_other_template = 'FAKEFAKEFAKE@#$@#$@#$'
