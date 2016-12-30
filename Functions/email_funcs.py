@@ -5,17 +5,17 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 
-def attach_file(msg, filename):
+def attach_file(msg, filepath):
     ''' Helper function for send_with_attachments: attach file to email
 
     param msg( MIMEMultipart): message Object
-    param filename(string): name of file to be attached
+    param filepath(string): name of file to be attached
     '''
-    attachment = open(filename, "rb")
+    attachment = open(filepath, "rb")
     part = MIMEBase('application', 'octet-stream')
     part.set_payload((attachment).read())
     encoders.encode_base64(part)
-    attachment_name = filename.split('/')[-1] if '/' in filename else filename
+    attachment_name = filepath.split('/')[-1] if '/' in filepath else filepath
     part.add_header('Content-Disposition', "attachment; filename= %s" % attachment_name)
     msg.attach(part)
 
@@ -37,7 +37,7 @@ def send_with_attachments(recipients, success_count=0, fail_count=0, success_fil
     msg['Subject'] = "Text Message Reminder Report: " + report
 
     if success:
-        body = "Text message reminders have been send out! Of the %s records in the spreadsheet, %s had valid data and %s did not. See attachments for details." %( success_count + fail_count, success_count, fail_count)
+        body = "Text message reminders have been sent out! Of the %s records in the spreadsheet, %s had valid data and %s did not. See attachments for details." %( success_count + fail_count, success_count, fail_count)
         if success_count: attach_file(msg, success_file)
         if fail_count: attach_file(msg, fail_file)
     else:

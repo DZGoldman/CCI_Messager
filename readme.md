@@ -44,20 +44,14 @@ Install requirements: (Requests module version 2.8.1)
 
 #### Set Environmental Variables:
 
-Environmental variables can be set by creating a file called 'secrets.py' in the application's root directory. The file should define the following string variables:
+From the app's root directory, run the following command:
 
-```python
-# secrets.py file:
-
-# API authentication:
-key = "<Whispir API Key>"
-user = "<Whispir API user-name>"
-whispir_password = "<Whispir API password>"
-
-# For sending notification emails:
-email = "<Gmail address>"
-password = "<Gmail password>"
 ```
+cp inputs_template.py inputs.py &&
+cp secrets_template.py secrets.py
+```
+
+In the secrets.py file, input your information (as strings).
 
 #### Run Program:
 ```
