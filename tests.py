@@ -1,7 +1,7 @@
 '''Testing suite'''
 import unittest, random, string
-from Functions.data_funcs import *
 from Functions.csv_funcs import *
+from Functions.data_funcs import *
 
 class DataTests(unittest.TestCase):
     def test_first_word(self):
@@ -43,7 +43,7 @@ class DataTests(unittest.TestCase):
             self.assertFalse(validate_email(bad_email))
         for good_email in ['dan@gmail.com', 'dan234@nycourts.edu', 'dan12345@aol.com']:
             self.assertEqual( validate_email(good_email), good_email)
-            
+
     def test_remove_final_punctuation(self):
         self.assertFalse(remove_final_punctuation(''))
         self.assertEqual(remove_final_punctuation('my sentence.'), 'my sentence')
@@ -64,4 +64,13 @@ class CSVTests(unittest.TestCase):
         result = filter_out_rows(test_json, lambda x: x==1, 'col_1')
         self.assertEqual(result,[{'col_1': 1,'col_2': 2} ])
         self.assertEqual(test_json, [{'col_1': 10,'col_2': 20}])
+class SystemTests(unittest.TestCase):
+    def test_python_version(self):
+        import sys
+        self.assertTrue(sys.version_info[0] >= 3 and sys.version_info[1] >= 5 and sys.version_info[2] >= 1)
+    def test_requests_version(self):
+        import requests
+        self.assertTrue(int(requests.__version__[0])>=2)
+    def test_api_authentication(self):
+        pass
 unittest.main()
