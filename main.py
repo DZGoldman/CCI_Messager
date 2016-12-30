@@ -4,7 +4,7 @@ Main program file where where methods in the 'Functions' directory are called.
 Imports CSV, converts it to JSON-style format, sanitizes data, removed invallid records, sends data to Whispir, and sends notification emails.
 '''
 import os
-from inputs import current_template, current_email_recs, current_file_name, imported_file_path
+from inputs import current_template, current_email_recs, current_file_name, imported_file_path, path_prefix
 from Functions.csv_funcs import *
 from Functions.api_funcs import *
 from Functions.data_funcs import *
