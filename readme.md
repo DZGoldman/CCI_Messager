@@ -51,11 +51,12 @@ cp inputs_template.py inputs.py &&
 cp secrets_template.py secrets.py
 ```
 
-In the secrets.py file, input your information (as strings).
+In the secrets.py file, input your information( API key, Whispir username/password, etc).
 
-Reccomended: create a .gitignore file untrack ignore secrets.py and inputs.py from git.
+Recommended: create a .gitignore file untrack ignore secrets.py and inputs.py from git.
 
 In the inputs.py file, set the imported_file_path variable as the path of the file to be imported (you may use the path_prefix variable for the path to the project's root directory.)
+
 #### Run Program:
 ```
 python3 main.py appt_template email_list_1 default_file
