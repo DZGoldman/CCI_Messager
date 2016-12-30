@@ -4,15 +4,15 @@ Main program file where where methods in the 'Functions' directory are called.
 Imports CSV, converts it to JSON-style format, sanitizes data, removed invallid records, sends data to Whispir, and sends notification emails.
 '''
 import os
-from inputs import current_template, current_email_recs, current_file_name
+from inputs import current_template, current_email_recs, current_file_name, imported_file_path
 from Functions.csv_funcs import *
 from Functions.api_funcs import *
 from Functions.data_funcs import *
 from Functions.email_funcs import *
-path_prefix = os.path.dirname(os.path.abspath(__file__))
+
 
 # Import data, and convert it to list of dictionaries format:
-csv_file = open( path_prefix + '/Test_Inputs/test_new_me.csv', 'rt',  encoding="latin-1")
+csv_file = open(imported_file_path, 'rt',  encoding="latin-1")
 data, columns =  jsonify(csv_file)
 
 # Set variables...

@@ -5,6 +5,7 @@ import sys
 
 # Add new variables below:
 
+imported_file_name = 'Test_Inputs/other_test.csv'
 # Whispir API templatees
 appt_template = '6DBC01BE80705741'
 my_other_template = 'FAKEFAKEFAKE@#$@#$@#$'

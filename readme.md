@@ -53,6 +53,8 @@ cp secrets_template.py secrets.py
 
 In the secrets.py file, input your information (as strings).
 
+Reccomended: create a .gitignore file untrack ignore secrets.py and inputs.py from git.
+
 #### Run Program:
 ```
 python3 main.py appt_template email_list_1 default_file
