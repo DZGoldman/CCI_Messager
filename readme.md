@@ -55,6 +55,7 @@ In the secrets.py file, input your information (as strings).
 
 Reccomended: create a .gitignore file untrack ignore secrets.py and inputs.py from git.
 
+In the inputs.py file, set the imported_file_path variable as the path of the file to be imported (you may use the path_prefix variable for the path to the project's root directory.)
 #### Run Program:
 ```
 python3 main.py appt_template email_list_1 default_file
@@ -91,7 +92,6 @@ Run all tests:
 Run one class of tests:
 ```
   python tests.py DataTests
-
 ```
 Run single tests:
 ```
