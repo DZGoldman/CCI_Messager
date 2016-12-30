@@ -13,6 +13,7 @@ from Functions.email_funcs import *
 
 # Import data, and convert it to list of dictionaries format:
 csv_file = open(imported_file_path, 'rt',  encoding="latin-1")
+
 data, columns =  jsonify(csv_file)
 
 # Set variables...
