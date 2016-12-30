@@ -2,6 +2,7 @@
 import unittest, random, string
 from Functions.csv_funcs import *
 from Functions.data_funcs import *
+from Functions.api_funcs import *
 
 class DataTests(unittest.TestCase):
     def test_first_word(self):
@@ -67,10 +68,17 @@ class CSVTests(unittest.TestCase):
 class SystemTests(unittest.TestCase):
     def test_python_version(self):
         import sys
-        self.assertTrue(sys.version_info[0] >= 3 and sys.version_info[1] >= 5 and sys.version_info[2] >= 1)
+        major, minor, micro = sys.version_info[0:3]
+        if major == 3 and minor == 5:
+            self.assertTrue(micro>=1)
+        else:
+            self.assertTrue(major >= 3 and minor >= 5)
     def test_requests_version(self):
-        import requests
         self.assertTrue(int(requests.__version__[0])>=2)
     def test_api_authentication(self):
-        pass
+        self.assertTrue(
+        requests.get(url="https://api.whispir.com/",auth = auth,params = querystring)
+        .ok)
+
+        # https://api.whispir.com/?apikey=89asdfohasd89023rsdfhio8923
 unittest.main()

@@ -15,7 +15,8 @@ def attach_file(msg, filename):
     part = MIMEBase('application', 'octet-stream')
     part.set_payload((attachment).read())
     encoders.encode_base64(part)
-    part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+    attachment_name = filename.split('/')[-1] if '/' in filename else filename
+    part.add_header('Content-Disposition', "attachment; filename= %s" % attachment_name)
     msg.attach(part)
 
 def send_with_attachments(recipients, success_count=0, fail_count=0, success_file = None, fail_file= None, success=True, api_response = None):

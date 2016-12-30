@@ -1,14 +1,47 @@
 ## Test Message Reminder Application
 
-This application inputs a csv file, an ID of a template from the Whispir API, a list of email contacts, and a file name; it sanitizes the CSV file, sends the data to the template on Whispir, and sends emails notifications to all constacts on the inputed list
+This application inputs a csv file, an ID of a template from the Whispir API, a list of email contacts, and a file name; it sanitizes the CSV file, sends the data to the template on Whispir, and sends emails notifications to all contacts on the inputed list.
 
-#### Install Dependencies:
-This app uses Python 3.5.1.
+#### Install Python:
 
-It uses the requests module version 2.8.1. If can be installed via pip as follows:
+Check python version:
+```
+python -V
+```
+
+If version is below 3.5.1, install python as follows (for Ubuntu/linux).
+
+Install:
+```
+cd ~/usr/src &&
+wget https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
+```
+
+Extract package:
+```
+sudo tar xzf Python-3.5.2.tgz
+
+```
+
+Compile Python source:  
+```
+cd ~/Python-3.5.2 &&
+sudo ./configure &&
+sudo make altinstall
+```
+
+##### Install requirements:
+
+Install pip:
+```
+sudo apt-get install -y python3-pip
+```
+
+Install requirements: (Requests module version 2.8.1)
 ```
   pip install --upgrade -r requirements.txt
 ```
+
 #### Set Environmental Variables:
 
 Environmental variables can be set by creating a file called 'secrets.py' in the application's root directory. The file should define the following string variables:
@@ -28,7 +61,7 @@ password = "<Gmail password>"
 
 #### Run Program:
 ```
-python main.py appt_template email_list_1 default_file
+python3 main.py appt_template email_list_1 default_file
 ```
 The command line arguments (after main.py) refer to variables defined in the inputs.py file:
 
@@ -82,4 +115,3 @@ python tests.py DataTests.test_validate_phone_number
 - json
 - unittest
 - random
--  string
