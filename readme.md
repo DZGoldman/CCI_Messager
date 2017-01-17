@@ -54,7 +54,7 @@ cp git_ignore_template .gitignore
 
 In the secrets.py file, input your information( API key, Whispir username/password, etc).
 
-See info.txt for details
+See info file for details
 
 
 #### Run Program:
@@ -63,7 +63,7 @@ python3 main.py appt_template email_list_1 default_file
 ```
 The command line arguments (after main.py) refer to variables defined in the inputs.py file.
 
-See info.txt for details.
+See info file for details.
 
 
 #### File Structure:
