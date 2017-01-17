@@ -80,5 +80,4 @@ class SystemTests(unittest.TestCase):
         requests.get(url="https://api.whispir.com/",auth = auth,params = querystring)
         .ok)
 
-        # https://api.whispir.com/?apikey=89asdfohasd89023rsdfhio8923
 unittest.main()

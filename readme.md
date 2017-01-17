@@ -48,30 +48,22 @@ From the app's root directory, run the following command:
 
 ```
 cp inputs_template.py inputs.py &&
-cp secrets_template.py secrets.py
+cp secrets_template.py secrets.py &&
+cp git_ignore_template .gitignore
 ```
 
 In the secrets.py file, input your information( API key, Whispir username/password, etc).
 
-Recommended: create a .gitignore file untrack ignore secrets.py and inputs.py from git.
+See info.txt for details
 
-In the inputs.py file, set the imported_file_path variable as the path of the file to be imported (you may use the path_prefix variable for the path to the project's root directory.)
 
 #### Run Program:
 ```
 python3 main.py appt_template email_list_1 default_file
 ```
-The command line arguments (after main.py) refer to variables defined in the inputs.py file:
+The command line arguments (after main.py) refer to variables defined in the inputs.py file.
 
-1st (string): ID of template on the Whisipr API.
-
-2nd (list of strings): Email addresses to receive notification email.
-
-3rd (string): Name of new CSV file to be created
-
-See the inputs.py file for examples. Additional variables for any of the 3 arguments can be added to that file; just make sure each of the command line arguments corresponds to a variable in inputs.py when the application is run.
-
-
+See info.txt for details.
 
 
 #### File Structure:
